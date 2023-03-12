@@ -1,7 +1,7 @@
 <script setup lang="ts">
-console.log("ccc")
+console.log('ccc')
 
-const a =   100
+const a = 100
 </script>
 
 <template>
@@ -12,7 +12,8 @@ const a =   100
 
 <style scoped>
 .icon {
-  width: 1em; height: 1em;
+  width: 1em;
+  height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
