@@ -1,5 +1,7 @@
 <script setup lang="ts">
+console.log("ccc")
 
+const a =   100
 </script>
 
 <template>
