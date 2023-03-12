@@ -1,13 +1,24 @@
 import { fileURLToPath, URL } from 'node:url'
-
+import path  from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteCompression from 'vite-plugin-compression'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx(), viteCompression()],
+  plugins: [
+      vue(),
+      vueJsx(),
+      viteCompression(),
+      createSvgIconsPlugin({
+    // 指定需要缓存的图标文件夹
+    iconDirs: [path.resolve(process.cwd(), 'src/lib/icons')],
+    // 指定symbolId格式
+    symbolId: 'icon-[name]',
+    inject: 'body-first'
+  })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
