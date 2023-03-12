@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
 
 
 // 获取Token
@@ -14,7 +14,7 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 // 状态码大于400的都将视作失败
 instance.defaults.validateStatus = (status:number) => status >= 200 && status <= 400
 instance.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
+    (config) => {
         // 在发送请求之前做些什么
         config.headers!.Authorization = AUTH_TOKEN()
         return config
@@ -24,11 +24,11 @@ instance.interceptors.request.use(
         Promise.reject(new Error('请求未发送'))
 )
 instance.interceptors.response.use(
-    (response: AxiosResponse) => {
+    (response) => {
         // const { data, status, statusText, headers, config, request } = response
         return response
     },
-    (error:AxiosResponse) => {
+    (error:any) => {
         if (!window.navigator.onLine) {
             // 断网处理比如跳转到断网页面
             window.alert('网络异常，请检查网络')
@@ -57,14 +57,14 @@ const httpRequest = (url: string, type = 'GET', data = {}) => {
         const option = {
             url,
             method: type
-        } as AxiosRequestConfig
+        } as {url:string,params?:any,data?:any}
         if (type.toLowerCase() === 'get') {
             option.params = data
         } else {
             option.data = data
         }
         instance(option)
-            .then((res: AxiosResponse) => {
+            .then((res) => {
                 if (res.status === 200 || res.status === 201) {
                     resolve(res.data)
                 } else {
