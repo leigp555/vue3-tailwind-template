@@ -1,9 +1,30 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const theme = () => {
+  document.documentElement.classList.contains('dark')
+    ? document.documentElement.classList.remove('dark')
+    : document.documentElement.classList.add('dark')
+}
+const pikachu = document.getElementById('pikachu')
+
+pikachu?.addEventListener('click', function () {
+  alert('皮卡丘，我选择你！')
+})
+</script>
 
 <template>
+  <div id="pikachu">
+    <div class="ear"></div>
+    <div class="face">
+      <div class="eye"></div>
+      <div class="eye"></div>
+      <div class="mouth"></div>
+    </div>
+    <div class="ear"></div>
+  </div>
   <svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-logo"></use>
   </svg>
+  <div id="apple"></div>
 
   <div class="menu">xxx</div>
   <button @click="theme">暗黑模式</button>
@@ -243,4 +264,87 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#apple {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ff1a1a;
+  position: relative;
+}
+
+#apple:before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background-color: #008000;
+  border-radius: 0 0 40% 40%;
+  top: -10px;
+  left: 35px;
+  transform: rotate(-45deg);
+}
+
+#pikachu {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.ear {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ffcc33;
+  position: absolute;
+  top: -20px;
+}
+
+.ear:first-child {
+  left: -20px;
+}
+
+.ear:last-child {
+  right: -20px;
+}
+
+.face {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #ffcc33;
+  position: absolute;
+  top: 50px;
+  left: 30px;
+}
+
+.eye {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #000;
+  position: absolute;
+}
+
+.eye:first-child {
+  top: 35px;
+  left: 40px;
+}
+
+.eye:last-child {
+  top: 35px;
+  right: 40px;
+}
+
+.mouth {
+  width: 60px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #000;
+  border-top: none;
+  position: absolute;
+  top: 85px;
+  left: 50px;
+  transform: rotate(-20deg);
+}
+</style>
